@@ -4,3 +4,6 @@ and we will always compute u_N-1,j using u_N-1,j-1 and u_N-2,j-1. This process i
 
 <img width="1224" height="1584" alt="Finite difference method 1" src="https://github.com/user-attachments/assets/28ffdbdc-0aa9-4d75-89e8-b2d87de0c5b8" />
 
+# Crank Nicholson Scheme
+The difference between CN scheme and FTCS scheme is in the stability. CN is unconditionally stable, meaning it does not have the r<1/2 requirement that FTCS scheme has. We continue to assume Dirichlet conditions. The code starts the same way, given an initial temperature array T_initial, partition the distance between 0 and L into len(T_initial) equally spaced points. r remains the same. The main difference is the computation at each time step. In the CN scheme, we compute all the temperature values at the new time using all the temperature values at the old time. This involves a solving a tridiagonal linear system of equations for the interior points only, since we have Direchlet boundary conditions. The derivation is provided in the image below. While CN is uncondtionally stable, the trade-off is it requires more computational complexity. To solve for the temperature values at the new time step, we need to use LU factorization. The rest of the code details are the same as in the FTCS scheme, so we won't repeat the explanation here. 
+
